@@ -1,29 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { bubbleSort } from './sorting-functions';
 
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.css']
 })
-export class MainLayoutComponent implements OnInit {
+export class MainLayoutComponent implements OnInit, AfterViewInit {
 
-  screenWidth: number = window.innerWidth / 2 || 0;
-  screenHeight: number = window.innerHeight / 2 || 0;
+  @ViewChild('chartCanvas') chartCanvas!: ElementRef;
 
-  nrOfSortingBars: number = 100;
-  maxBarHeight: number = 40;
-  barWidth = this.screenWidth / this.nrOfSortingBars;
-  sortingBars: number[] = Array.from({length: this.nrOfSortingBars}, () => Math.floor(Math.random() * this.maxBarHeight + 1));
+  randomInputArray: number[] = Array.from({length: 40}, () => Math.floor(Math.random() * 100));
+  sortingFunction: Function = bubbleSort;
+  isViewInit: boolean = false;
+  chartCanvasWidth: number = 0;
+  chartCanvasHeight: number = 0;
 
-  comparedFirstBarIndex: number = 0;
-  comparedSecondBarIndex: number = 0;
+  constructor(private cdRef : ChangeDetectorRef) { }
 
-  constructor() { }
+  ngOnInit() { }
 
-  async ngOnInit() {
-    await this.randomBubbleSort(this.sortingBars);
-  }
-
+  ngAfterViewInit() {
+    this.isViewInit = true;
+    this.chartCanvasWidth = this.chartCanvas.nativeElement.offsetWidth;
+    this.chartCanvasHeight = this.chartCanvas.nativeElement.offsetHeight || 200;
     this.cdRef.detectChanges();
   }
 

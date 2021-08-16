@@ -1,11 +1,16 @@
 <p>main-layout works!</p>
 
-<div>
-    <!-- {{ sortingBars | async }} -->
-    <div *ngFor="let bar of sortingBars; let i = index" class="bar"
-        [style.height]="((bar * screenHeight) / maxBarHeight).toString() + 'px'"
-        [style.width]="(screenWidth / nrOfSortingBars).toString() + 'px'"
-        [style.background-color]="i === comparedFirstBarIndex || i === comparedSecondBarIndex ? 'red' : 'lightblue'">
-        <!-- {{ bar }} -->
-    </div>
+<div class="my-1">
+    Pick a sorting algorithm :)
+</div>
+
+<div class="col-6" #chartCanvas>
+    <app-chart *ngIf="isViewInit"
+        [componentWidth]="chartCanvasWidth"
+        [componentHeight]="chartCanvasHeight"
+        [inputArray]="randomInputArray"
+        [sortingFunction]="sortingFunction"
+        [delay]="100"
+    ></app-chart>
+
 </div>
