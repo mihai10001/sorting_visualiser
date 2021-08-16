@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MainLayoutComponent } from './main-layout/main-layout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'home',
-    component: MainLayoutComponent,
+    loadChildren: () => import('./main-layout/main-layout.module').then(m => m.MainLayoutModule),
   },
   { path: '**', redirectTo: '' }
 ];
