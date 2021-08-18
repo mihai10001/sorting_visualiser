@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 
 import { MainLayoutRoutingModule } from './main-layout-routing.module';
@@ -14,6 +15,7 @@ import { ChartComponent } from './chart/chart.component';
   imports: [
     CommonModule,
     MainLayoutRoutingModule,
+    ReactiveFormsModule,
     MaterialModule
   ]
 })

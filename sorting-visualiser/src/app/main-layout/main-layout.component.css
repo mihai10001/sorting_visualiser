@@ -1,0 +1,9 @@
+
+.settings-header-image {
+    background-image: url('/assets/android_cog.png');
+    background-size: cover;
+}
+
+.slider-label-bold {
+    font-weight: 600;
+}

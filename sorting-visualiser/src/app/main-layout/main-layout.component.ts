@@ -1,5 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { bubbleSort } from './sorting-functions';
+import { FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-main-layout',
@@ -16,8 +15,12 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
   chartCanvasWidth: number = 0;
   chartCanvasHeight: number = 0;
 
-  constructor(private cdRef : ChangeDetectorRef) { }
+  customizeSettingsForm = this.formBuilder.group({
+    delay: [10],
+    inputArraySize: [20],
+  });
 
+  constructor(private formBuilder: FormBuilder) { }
   ngOnInit() { }
 
   ngAfterViewInit() {
