@@ -1,5 +1,7 @@
 import { FormControl, FormBuilder } from '@angular/forms';
 
+import { SortingFunctions } from './sorting-functions';
+
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
@@ -9,12 +11,11 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
 
   @ViewChild('chartCanvas') chartCanvas!: ElementRef;
 
-  randomInputArray: number[] = Array.from({length: 40}, () => Math.floor(Math.random() * 100));
-  sortingFunction: Function = bubbleSort;
-  isViewInit: boolean = false;
   chartCanvasWidth: number = 0;
   chartCanvasHeight: number = 0;
+  sortingFunctions: { [index: string]: Function } = SortingFunctions;
 
+  selectedSortingFunctions = new FormControl();
   customizeSettingsForm = this.formBuilder.group({
     delay: [10],
     inputArraySize: [20],

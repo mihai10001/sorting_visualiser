@@ -1,3 +1,7 @@
+.logo-header-image {
+    background-image: url('/assets/sorting.png');
+    background-size: 225%;
+}
 
 .settings-header-image {
     background-image: url('/assets/android_cog.png');

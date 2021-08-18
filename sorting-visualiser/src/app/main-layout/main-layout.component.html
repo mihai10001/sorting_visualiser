@@ -1,8 +1,24 @@
-<p>main-layout works!</p>
+  <div class="col-12 p-1">
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar class="logo-header-image"></div>
+        <mat-card-title>Sorting algorithms</mat-card-title>
+        <mat-card-subtitle>Choose one or more sorting algorithms to compare, then press Play</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="d-flex">
+        <mat-form-field appearance="fill" class="w-25">
+          <mat-label>Sorting functions</mat-label>
+          <mat-select [formControl]="selectedSortingFunctions" multiple>
+            <mat-option *ngFor="let function of sortingFunctions | keyvalue" [value]="function.key">{{ function.key }}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-<div class="my-1">
-    Pick a sorting algorithm :)
-</div>
+        <button mat-fab color="accent" class="mx-2" (click)="onPlayOrSave()">
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
 <div class="col-6" #chartCanvas>
     <app-chart *ngIf="isViewInit"
