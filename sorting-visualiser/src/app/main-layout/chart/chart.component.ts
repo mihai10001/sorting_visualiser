@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnChanges {
 
   constructor() { }
 
@@ -19,7 +20,7 @@ export class ChartComponent implements OnInit {
   inputArrayMaximum: number = 0;
   highlightedIndexArray: number[] = [];
 
-  async ngOnInit() {
+  async ngOnChanges() {
     this.inputArrayLength = this.inputArray.length;
     this.inputArrayMaximum = Math.max(...this.inputArray);
 

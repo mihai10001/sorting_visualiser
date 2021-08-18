@@ -1,4 +1,7 @@
 .bar {
-    border: 1px dotted black;
     display: inline-block;
+
+    border: 1px dotted black;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
 }
