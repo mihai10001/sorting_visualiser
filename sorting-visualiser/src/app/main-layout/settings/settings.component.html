@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="settings-header-image"></div>
+    <mat-card-title>Settings</mat-card-title>
+    <mat-card-subtitle>Customize preferences. then press Play</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="w-75 d-flex justify-content-between">
+      <label>Input array size</label>
+      <label class="slider-label-bold">{{ customizeSettingsForm.controls.inputArrayLength.value }}</label>
+    </div>
+    <mat-slider min="1" max="300" thumbLabel class="w-75"
+      [value]="customizeSettingsForm.controls.inputArrayLength.value"
+      (change)="customizeSettingsForm.controls.inputArrayLength.setValue($event.value)">
+    </mat-slider>
+
+    <div class="w-75 d-flex justify-content-between">
+      <label>Delay between array swaps</label>
+      <label class="slider-label-bold">{{ customizeSettingsForm.controls.delay.value }}</label>
+    </div>
+    <mat-slider min="1" max="1000" thumbLabel class="w-75"
+      [value]="customizeSettingsForm.controls.delay.value"
+      (change)="customizeSettingsForm.controls.delay.setValue($event.value)">
+    </mat-slider>
+  </mat-card-content>
+  * Incoming more settings :O *
+</mat-card>
