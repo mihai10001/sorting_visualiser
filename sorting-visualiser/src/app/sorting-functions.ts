@@ -1,4 +1,16 @@
-export const SortingFunctions = {
+export type SortingFunctionObjectType = {
+  [functionName: string]: SortingFunctionType
+}
+
+/* Interface for defining a sorting function */
+type SortingFunctionType = (
+  array: number[],
+  highlightedIndexArray: number[],
+  delay: number
+) => Promise<any>
+
+
+export const SortingFunctions: SortingFunctionObjectType = {
   'Basic Bubble Sort': async (array: number[], highlightedIndexArray: number[], delay: number) => {
     for(let i = 0; i < array.length - 1; i++)
       for(let j = 0; j < array.length - i - 1; j++) {
