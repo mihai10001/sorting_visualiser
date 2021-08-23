@@ -1,6 +1,7 @@
-import { FormControl, FormBuilder } from '@angular/forms';
-
-import { SortingFunctions } from './sorting-functions';
+import { OnInit, AfterViewInit, Component, HostListener, ChangeDetectorRef } from '@angular/core';
+import { ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { SortingFunctions, SortingFunctionObjectType } from '../sorting-functions';
+import { SettingsService } from './services/settings.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -9,26 +10,32 @@ import { SortingFunctions } from './sorting-functions';
 })
 export class MainLayoutComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('chartCanvas') chartCanvas!: ElementRef;
+  @ViewChildren('chartCanvases', {read: ElementRef})
+  chartCanvases!: QueryList<ElementRef>;
 
   chartCanvasWidth: number = 0;
   chartCanvasHeight: number = 0;
   sortingFunctions: { [index: string]: Function } = SortingFunctions;
 
-  selectedSortingFunctions = new FormControl();
-  customizeSettingsForm = this.formBuilder.group({
-    delay: [10],
-    inputArraySize: [20],
-  });
+  constructor(
+    private changeDetector: ChangeDetectorRef,
+    private settingsService: SettingsService
+  ) { }
 
   constructor(private formBuilder: FormBuilder) { }
   ngOnInit() { }
 
   ngAfterViewInit() {
-    this.isViewInit = true;
-    this.chartCanvasWidth = this.chartCanvas.nativeElement.offsetWidth;
-    this.chartCanvasHeight = this.chartCanvas.nativeElement.offsetHeight || 200;
-    this.cdRef.detectChanges();
+    this.chartCanvases.changes.subscribe(() => this.refreshCanvas());
   }
 
+  @HostListener('window:resize')
+  onResize() {
+    this.refreshCanvas();
+  }
+
+  refreshCanvas() {
+    this.chartCanvasWidth = this.chartCanvases.length > 0 ? this.chartCanvases.first.nativeElement.offsetWidth - 10 : 0;
+    this.changeDetector.detectChanges();
+  }
 }
