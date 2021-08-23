@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
 
-  private _delay: number = 40;
+  private _delay: number = 20;
   private _inputArray: number[] = [];
-  private _inputArrayLength: number = 20;
+  private _inputArrayLength: number = 40;
   private _selectedSortingFunctionKeys: Subject<string[]> = new Subject();
   private _playSortingFunction: Subject<boolean> = new Subject();
 
