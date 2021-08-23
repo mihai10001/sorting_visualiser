@@ -1,3 +1,4 @@
+import { SettingsService } from '../services/settings.service';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -8,23 +9,30 @@ import { Subject } from 'rxjs';
 })
 export class ChartComponent implements OnChanges {
 
-  constructor() { }
+  constructor(
+    private settingsService: SettingsService,
+    private resultsService: ResultsService)
+  { }
 
   @Input() componentWidth: number = 0;
   @Input() componentHeight: number = 0;
-  @Input() inputArray: number[] = [];
   @Input() sortingFunction: Function = Function();
   @Input() delay: number = 0;
   
-  inputArrayLength: number = 0;
-  inputArrayMaximum: number = 0;
+  delay: number = this.settingsService.delay;
+  inputArray: number[] = [...this.settingsService.inputArray];
+  inputArrayLength: number = this.settingsService.inputArrayLength;
+  inputArrayMaximum: number = Math.max(...this.settingsService.inputArray);
   highlightedIndexArray: number[] = [];
 
-  async ngOnChanges() {
-    this.inputArrayLength = this.inputArray.length;
-    this.inputArrayMaximum = Math.max(...this.inputArray);
+  async ngOnInit() {
 
-    await this.sortingFunction(this.inputArray, this.highlightedIndexArray, this.delay);
+  reloadSettings() {
+    this.delay = this.settingsService.delay;
+    this.inputArray = [...this.settingsService.inputArray];
+    this.inputArrayLength = this.settingsService.inputArrayLength;
+    this.inputArrayMaximum = Math.max(...this.settingsService.inputArray);
+    this.highlightedIndexArray = [];
   }
 
 }
