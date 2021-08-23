@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SettingsService } from '../services/settings.service';
+import { ResultsService } from '../services/results.service';
 import { SortingFunctions, SortingFunctionObjectType } from '../../sorting-functions';
 
 @Component({
@@ -12,6 +13,9 @@ export class SortingSelectorComponent implements OnInit {
 
   sortingFunctions: SortingFunctionObjectType = SortingFunctions;
   selectedSortingFunctionForm: FormControl = new FormControl();
+  playClickedCount: number = 0;
+
+  
   constructor(
     private settingsService: SettingsService,
     private resultsService: ResultsService
@@ -25,6 +29,14 @@ export class SortingSelectorComponent implements OnInit {
     });
   }
 
+  onPlay() {
+    this.playClickedCount++;
+    this.playClickedCount > 1 
+    && (this.settingsService.inputArray = this.generateRandomInputArray(this.settingsService.inputArrayLength));
+    this.settingsService.playSortingFunctionValue = true;
+    this.resultsService.resultsSetNull = [];
+    this.resultsService.resultsSubjectNext = true;
+  }
   
   generateRandomInputArray(arraySize: number): number[] {
     return Array.from({length: arraySize},
