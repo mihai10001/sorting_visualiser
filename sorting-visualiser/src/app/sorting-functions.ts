@@ -11,15 +11,22 @@ type SortingFunctionType = (
 
 
 export const SortingFunctions: SortingFunctionObjectType = {
-  'Basic Bubble Sort': async (array: number[], highlightedIndexArray: number[], delay: number) => {
+  'Bubble Sort': async (array: number[], highlightedIndexArray: number[], delay: number) => {
+    let results: ResultsObjectClass = new ResultsObjectClass();
+
     for(let i = 0; i < array.length - 1; i++)
       for(let j = 0; j < array.length - i - 1; j++) {
+        ++results.numberOfComparisons;
         if(array[j] > array[j+1]) {
           highlightedIndexArray[0] = j;
           highlightedIndexArray[1] = j + 1;
+          ++results.numberOfSwaps;
           await swap(array, j, j + 1, delay);
         }
       }
+    
+    return results;
+  },
   }
 };
       
