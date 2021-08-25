@@ -14,16 +14,20 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
   chartCanvases!: QueryList<ElementRef>;
 
   chartCanvasWidth: number = 0;
-  chartCanvasHeight: number = 0;
-  sortingFunctions: { [index: string]: Function } = SortingFunctions;
+  chartCanvasHeight: number = 200;
+  sortingFunctions: SortingFunctionObjectType = SortingFunctions;
+  selectedSortingFunctionKeys: string[] = [];
 
   constructor(
     private changeDetector: ChangeDetectorRef,
     private settingsService: SettingsService
   ) { }
 
-  constructor(private formBuilder: FormBuilder) { }
-  ngOnInit() { }
+  ngOnInit() {
+    this.settingsService.selectedSortingFunctionKeys.subscribe(keys =>
+      this.selectedSortingFunctionKeys = keys
+    );
+  }
 
   ngAfterViewInit() {
     this.chartCanvases.changes.subscribe(() => this.refreshCanvas());

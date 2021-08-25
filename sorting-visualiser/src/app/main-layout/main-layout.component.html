@@ -3,24 +3,23 @@
     <app-sorting-selector></app-sorting-selector>
   </div>
 
+  <div class="col-md-12 col-lg-9 p-1">
 
-
-
-
-
-
-
-<div class="col-6" #chartCanvas>
-    <app-chart *ngIf="isViewInit"
-        [componentWidth]="chartCanvasWidth"
-        [componentHeight]="chartCanvasHeight"
+      <div class="row g-0">
+        <div class="col-md-12 col-lg-6" *ngFor="let key of selectedSortingFunctionKeys" #chartCanvases>
+          <div class="mb-1"><kbd>{{ key }}</kbd></div>
+          <app-chart
+            [componentWidth]="chartCanvasWidth"
+            [componentHeight]="chartCanvasHeight"
+            [sortingFunction]="sortingFunctions[key]"
+            [sortingFunctionName]="key"
           ></app-chart>
         </div>
       </div>
     </mat-card>
   </div>
 
-  <div class="col-md-12 col-lg-4 p-1">
+  <div class="col-md-12 col-lg-3 p-1">
     <app-settings></app-settings>
   </div>
 
