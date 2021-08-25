@@ -1,6 +1,6 @@
 import { SettingsService } from '../services/settings.service';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { ResultsService, ResultsObjectClass } from '../services/results.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-chart',
@@ -25,7 +25,24 @@ export class ChartComponent implements OnChanges {
   inputArrayMaximum: number = Math.max(...this.settingsService.inputArray);
   highlightedIndexArray: number[] = [];
 
+  playSortingSubscription: Subscription =  new Subscription();
+
   async ngOnInit() {
+    this.playSortingSubscription = this.settingsService.playSortingFunction.subscribe(async () => {
+      this.reloadSettings();
+
+      const t0 = performance.now();
+      const result: ResultsObjectClass = await this.sortingFunction(this.inputArray, this.highlightedIndexArray, this.delay);
+      const t1 = performance.now();
+
+      result.functionName = this.sortingFunctionName;
+      result.totalExecutionTime = Math.round((t1 - t0) * 100) / 100;
+      result.delayUsed = this.delay;
+
+      this.resultsService.resultsPush = result;
+      this.resultsService.resultsSubjectNext = true;
+    });
+  }
 
   reloadSettings() {
     this.delay = this.settingsService.delay;
