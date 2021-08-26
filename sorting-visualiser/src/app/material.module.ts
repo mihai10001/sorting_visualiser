@@ -5,6 +5,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatSelectModule,
     MatFormFieldModule,
     MatSliderModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule
   ],
   exports: [
     MatCardModule,
