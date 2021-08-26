@@ -1,3 +1,4 @@
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { SettingsService } from '../services/settings.service';
 import { ResultsService, ResultsObjectClass } from '../services/results.service';
 import { Subscription } from 'rxjs';
@@ -7,7 +8,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnChanges {
+export class ChartComponent implements OnInit, OnDestroy {
 
   constructor(
     private settingsService: SettingsService,
@@ -17,7 +18,7 @@ export class ChartComponent implements OnChanges {
   @Input() componentWidth: number = 0;
   @Input() componentHeight: number = 0;
   @Input() sortingFunction: Function = Function();
-  @Input() delay: number = 0;
+  @Input() sortingFunctionName: string = '';
   
   delay: number = this.settingsService.delay;
   inputArray: number[] = [...this.settingsService.inputArray];
@@ -52,4 +53,7 @@ export class ChartComponent implements OnChanges {
     this.highlightedIndexArray = [];
   }
 
+  ngOnDestroy() {
+    this.playSortingSubscription.unsubscribe();
+  }
 }
