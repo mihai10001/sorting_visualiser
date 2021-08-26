@@ -1,3 +1,5 @@
+import { ResultsObjectClass } from './main-layout/services/results.service';
+
 export type SortingFunctionObjectType = {
   [functionName: string]: SortingFunctionType
 }
@@ -7,7 +9,7 @@ type SortingFunctionType = (
   array: number[],
   highlightedIndexArray: number[],
   delay: number
-) => Promise<any>
+) => Promise<ResultsObjectClass>
 
 
 export const SortingFunctions: SortingFunctionObjectType = {
