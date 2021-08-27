@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { MatTableModule } from '@angular/material/table';
     MatFormFieldModule,
     MatSliderModule,
     MatIconModule,
-    MatTableModule
+    MatProgressSpinnerModule
   ],
   exports: [
     MatCardModule,
@@ -24,7 +25,7 @@ import { MatTableModule } from '@angular/material/table';
     MatSelectModule,
     MatFormFieldModule,
     MatSliderModule,
-    MatIconModule
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule {}
