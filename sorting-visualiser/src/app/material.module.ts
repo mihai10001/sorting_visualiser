@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
@@ -17,6 +18,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatSliderModule,
     MatIconModule,
+    MatTableModule,
+    MatSortModule,
     MatProgressSpinnerModule
   ],
   exports: [
@@ -25,6 +28,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSelectModule,
     MatFormFieldModule,
     MatSliderModule,
+    MatIconModule,
+    MatTableModule,
+    MatSortModule,
     MatProgressSpinnerModule
   ]
 })
