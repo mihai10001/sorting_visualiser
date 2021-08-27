@@ -18,7 +18,7 @@ export class LoadingWrapperComponent implements OnInit {
 
   ngOnInit() {
     this.settingsService.playSortingFunction.subscribe(() => this._isLoading = true);
-    this.resultsService.resultsSubject.subscribe(() => this._isLoading = (this.resultsService.results.length > 0) ? true : false);
+    this.resultsService.resultsSubject.subscribe(() => this._isLoading = (this.resultsService.results.length > 0) ? false : true);
   }
 
 }
