@@ -17,7 +17,19 @@ export class BarChartComponent implements OnInit {
     plugins: { legend: { labels: { color: 'white' } } }
   };
 
+  constructor(private resultsService: ResultsService) { }
 
   ngOnInit() {
+    this.resultsService.resultsSubject.subscribe(
+      () => 
+        this.barChartData = this.resultsService.results.map(
+          (result: ResultsObjectClass) => {
+            return {
+              data: [result.totalExecutionTime, result.numberOfSwaps, result.numberOfComparisons, result.delayUsed],
+              label: result.functionName
+            } as ChartDataset
+          } 
+        )
+    );
   }
 }
