@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataset, ChartOptions } from 'chart.js';
+import { ResultsService, ResultsObjectClass } from '../../services/results.service';
+
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
@@ -25,7 +27,19 @@ export class PieChartComponent implements OnInit {
     },
   };
 
+  constructor(private resultsService: ResultsService) { }
 
   ngOnInit() {
+    this.resultsService.resultsSubject.subscribe(
+      () =>
+        this.pieChartData = this.resultsService.results.map(
+          (result: ResultsObjectClass) => {
+            return {
+              data: [result.totalExecutionTime, result.numberOfSwaps, result.numberOfComparisons, result.delayUsed],
+              label: result.functionName
+            } as ChartDataset
+          } 
+        )
+    );
   }
 }
