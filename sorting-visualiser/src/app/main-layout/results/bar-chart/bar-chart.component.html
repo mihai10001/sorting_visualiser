@@ -1,0 +1,13 @@
+<mat-card>
+  <app-loading-wrapper>
+    <mat-card-content>
+      <canvas baseChart *ngIf="barChartData.length > 0"
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="true"
+        type="bar">
+      </canvas>
+    </mat-card-content>
+  </app-loading-wrapper>
+</mat-card>
