@@ -25,6 +25,8 @@ export class ChartComponent implements OnInit, OnDestroy {
   inputArrayLength: number = this.settingsService.inputArrayLength;
   inputArrayMaximum: number = Math.max(...this.settingsService.inputArray);
   highlightedIndexArray: number[] = [];
+  barColor: string = this.settingsService.colors.barColor;
+  highlightedBarColor: string = this.settingsService.colors.highlightedBarColor;
   result: ResultsObjectClass = new ResultsObjectClass();
 
   playSortingSubscription: Subscription =  new Subscription();
@@ -53,6 +55,8 @@ export class ChartComponent implements OnInit, OnDestroy {
     this.inputArrayLength = this.settingsService.inputArrayLength;
     this.inputArrayMaximum = Math.max(...this.settingsService.inputArray);
     this.highlightedIndexArray = [];
+    this.barColor = this.settingsService.colors.barColor;
+    this.highlightedBarColor = this.settingsService.colors.highlightedBarColor;
     this.result = new ResultsObjectClass();
   }
 

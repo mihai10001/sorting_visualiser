@@ -2,7 +2,7 @@
   <div *ngFor="let bar of inputArray; let i = index" class="bar"
     [style.height]="((bar * componentHeight) / inputArrayMaximum).toString() + 'px'"
     [style.width]="(componentWidth / inputArrayLength).toString() + 'px'"
-    [style.background-color]="highlightedIndexArray.includes(i) ? 'red' : 'lightblue'">
+    [style.background-color]="highlightedIndexArray.includes(i) ? highlightedBarColor : barColor">
   </div>
 
   <div class="results" *ngIf="result.totalExecutionTime">
