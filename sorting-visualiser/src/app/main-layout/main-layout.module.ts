@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 import { MainLayoutRoutingModule } from './main-layout-routing.module';
 import { MainLayoutComponent } from './main-layout.component';
@@ -23,6 +24,8 @@ import { ResultsService } from './services/results.service';
     CommonModule,
     MainLayoutRoutingModule,
     ReactiveFormsModule,
+    MaterialModule,
+    ColorPickerModule
   providers: [
     SettingsService,
     ResultsService
