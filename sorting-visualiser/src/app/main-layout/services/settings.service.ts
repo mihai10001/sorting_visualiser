@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
+export type ColorType = { [key in 'barColor' | 'highlightedBarColor']: string };
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +12,7 @@ export class SettingsService {
   private _inputArrayLength: number = 40;
   private _selectedSortingFunctionKeys: Subject<string[]> = new Subject();
   private _playSortingFunction: Subject<boolean> = new Subject();
+  private _colors: ColorType = { barColor: '#71a6d2', highlightedBarColor: 'LightYellow'};
 
   constructor() { }
 
@@ -48,4 +50,12 @@ export class SettingsService {
   set playSortingFunctionValue(play: boolean) {
     this._playSortingFunction.next(play);
   }
+
+  get colors(): ColorType {
+    return this._colors;
+  }
+  set colors(colors: ColorType) {
+    this._colors = colors;
+  }
+
 }
