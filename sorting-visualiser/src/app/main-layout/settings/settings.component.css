@@ -6,3 +6,9 @@
 .slider-label-bold {
     font-weight: 600;
 }
+
+.custom-mat-label {
+    color: white;
+    font-size: 18px;
+}
+

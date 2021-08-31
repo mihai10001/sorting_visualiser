@@ -22,6 +22,21 @@
       [value]="customizeSettingsForm.controls.delay.value"
       (change)="customizeSettingsForm.controls.delay.setValue($event.value)">
     </mat-slider>
+      <div>
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label class="custom-mat-label">Bar color</mat-label>
+          <input matInput [colorPicker]="customizeSettingsForm.controls.barColor.value"
+            (colorPickerChange)="customizeSettingsForm.controls.barColor.setValue($event)"
+            [style.background]="customizeSettingsForm.controls.barColor.value" readonly>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label class="custom-mat-label">Highlighted bar color</mat-label>
+          <input matInput [colorPicker]="customizeSettingsForm.controls.highlightedBarColor.value"
+            (colorPickerChange)="customizeSettingsForm.controls.highlightedBarColor.setValue($event)"
+            [style.background]="customizeSettingsForm.controls.highlightedBarColor.value" readonly>
+        </mat-form-field>
+      </div>
   </mat-card-content>
   * Incoming more settings :O *
 </mat-card>
