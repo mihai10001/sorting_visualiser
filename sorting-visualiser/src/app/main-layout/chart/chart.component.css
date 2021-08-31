@@ -1,7 +1,16 @@
+.chart-parrent {
+    position: relative;
+}
+
 .bar {
     display: inline-block;
 
     border: 1px dotted black;
     border-radius: 0.25rem;
     box-sizing: border-box;
+}
+
+.results {
+    position: absolute;
+    top: 0;
 }

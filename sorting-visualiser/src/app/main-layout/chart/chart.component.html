@@ -1,5 +1,13 @@
-<div *ngFor="let bar of inputArray; let i = index" class="bar"
+<div class="chart-parrent">
+  <div *ngFor="let bar of inputArray; let i = index" class="bar"
     [style.height]="((bar * componentHeight) / inputArrayMaximum).toString() + 'px'"
     [style.width]="(componentWidth / inputArrayLength).toString() + 'px'"
     [style.background-color]="highlightedIndexArray.includes(i) ? 'red' : 'lightblue'">
+  </div>
+
+  <div class="results" *ngIf="result.totalExecutionTime">
+    <div><kbd>Execution time (ms): {{ result.totalExecutionTime }}</kbd></div>
+    <div><kbd>Comparisons: {{ result.numberOfComparisons }}</kbd></div>
+    <div><kbd>Swaps: {{ result.numberOfSwaps }}</kbd></div>
+  </div>
 </div>

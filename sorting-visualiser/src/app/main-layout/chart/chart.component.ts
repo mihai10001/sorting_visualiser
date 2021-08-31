@@ -25,6 +25,7 @@ export class ChartComponent implements OnInit, OnDestroy {
   inputArrayLength: number = this.settingsService.inputArrayLength;
   inputArrayMaximum: number = Math.max(...this.settingsService.inputArray);
   highlightedIndexArray: number[] = [];
+  result: ResultsObjectClass = new ResultsObjectClass();
 
   playSortingSubscription: Subscription =  new Subscription();
 
@@ -40,6 +41,7 @@ export class ChartComponent implements OnInit, OnDestroy {
       result.totalExecutionTime = Math.round((t1 - t0) * 100) / 100;
       result.delayUsed = this.delay;
 
+      this.result = result;
       this.resultsService.resultsPush = result;
       this.resultsService.resultsSubjectNext = true;
     });
@@ -51,6 +53,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     this.inputArrayLength = this.settingsService.inputArrayLength;
     this.inputArrayMaximum = Math.max(...this.settingsService.inputArray);
     this.highlightedIndexArray = [];
+    this.result = new ResultsObjectClass();
   }
 
   ngOnDestroy() {
