@@ -28,7 +28,17 @@ export class SettingsComponent implements OnInit {
       this.settingsService.delay = formValue.delay;
       this.settingsService.inputArrayLength = formValue.inputArrayLength;
       this.settingsService.inputArrayType = formValue.inputArrayType;
+      this.settingsService.inputArray = this.sanitizeUserInputArray(formValue.userInputArray);
       this.settingsService.colors = { 'barColor': formValue.barColor, 'highlightedBarColor': formValue.highlightedBarColor } as ColorType;
     });
+  }
+
+  sanitizeUserInputArray(userInputString: string) {
+    // Only numbers and ',.-' characters allowed
+    userInputString = userInputString.replace(/[^\d,.-]/g, '');
+    return userInputString
+      .split(',')
+      .filter(el => parseFloat(el.trim()) !== NaN)
+      .map(el => parseFloat(el));
   }
 }

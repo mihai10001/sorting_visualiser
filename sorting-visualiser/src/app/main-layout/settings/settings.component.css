@@ -12,3 +12,6 @@
     font-size: 18px;
 }
 
+.mat-slider-disabled {
+    pointer-events: none;
+}

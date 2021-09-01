@@ -18,14 +18,13 @@
         <input matInput formControlName="userInputArray">
       </mat-form-field>
 
-    <div class="w-75 d-flex justify-content-between">
-      <label>Input array size</label>
-      <label class="slider-label-bold">{{ customizeSettingsForm.controls.inputArrayLength.value }}</label>
-    </div>
-    <mat-slider min="1" max="300" thumbLabel class="w-75"
-      [value]="customizeSettingsForm.controls.inputArrayLength.value"
-      (change)="customizeSettingsForm.controls.inputArrayLength.setValue($event.value)">
-    </mat-slider>
+      <div class="w-75 d-flex justify-content-between">
+        <label>Input array size</label>
+        <label class="slider-label-bold">{{ customizeSettingsForm.controls.inputArrayLength.value }}</label>
+      </div>
+      <mat-slider formControlName="inputArrayLength" min="1" max="300" thumbLabel class="w-75"
+        [class.mat-slider-disabled]="customizeSettingsForm.controls.inputArrayType.value === 'userInputArray'">
+      </mat-slider>
 
     <div class="w-75 d-flex justify-content-between">
       <label>Delay between array swaps (ms)</label>
