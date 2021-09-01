@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 export type ColorType = { [key in 'barColor' | 'highlightedBarColor']: string };
+export type InputArrayType = 'randomSequentialArray' | 'randomArray' | 'userInputArray';
+export type InputArrayTypeObject = { [key in InputArrayType]: string };
+export const possibleInputArrayTypes: InputArrayTypeObject = {
+  'randomSequentialArray': 'Random sequential array (default)',
+  'randomArray': 'Random array',
+  'userInputArray': 'User input array'
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -10,6 +17,7 @@ export class SettingsService {
   private _delay: number = 20;
   private _inputArray: number[] = [];
   private _inputArrayLength: number = 40;
+  private _inputArrayType: InputArrayType = 'randomSequentialArray';
   private _selectedSortingFunctionKeys: Subject<string[]> = new Subject();
   private _playSortingFunction: Subject<boolean> = new Subject();
   private _colors: ColorType = { barColor: '#71a6d2', highlightedBarColor: 'LightYellow'};
@@ -35,6 +43,13 @@ export class SettingsService {
   }
   set inputArrayLength(inputArrayLength: number) {
     this._inputArrayLength = inputArrayLength;
+  }
+
+  get inputArrayType(): InputArrayType {
+    return this._inputArrayType;
+  }
+  set inputArrayType(inputArrayType: InputArrayType) {
+    this._inputArrayType = inputArrayType;
   }
 
   get selectedSortingFunctionKeys(): Subject<string[]> {
