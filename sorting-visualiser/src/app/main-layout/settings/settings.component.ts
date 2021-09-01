@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SettingsService } from '../services/settings.service';
+import { SettingsService, ColorType, InputArrayTypeObject, possibleInputArrayTypes } from '../services/settings.service';
 
 @Component({
   selector: 'app-settings',
@@ -10,6 +10,7 @@ import { SettingsService } from '../services/settings.service';
 export class SettingsComponent implements OnInit {
 
   customizeSettingsForm!: FormGroup;
+  possibleInputArrayTypes: InputArrayTypeObject = possibleInputArrayTypes;
 
   constructor(private formBuilder: FormBuilder, private settingsService: SettingsService) { }
 
@@ -17,6 +18,8 @@ export class SettingsComponent implements OnInit {
     this.customizeSettingsForm = this.formBuilder.group({
       delay: [this.settingsService.delay],
       inputArrayLength: [this.settingsService.inputArrayLength],
+      inputArrayType: [this.settingsService.inputArrayType],
+      userInputArray: ['7, 6, 5, 4, 3, 2, 1'],
       barColor: [this.settingsService.colors.barColor],
       highlightedBarColor: [this.settingsService.colors.highlightedBarColor],
     });
@@ -24,6 +27,7 @@ export class SettingsComponent implements OnInit {
     this.customizeSettingsForm.valueChanges.subscribe(formValue => {
       this.settingsService.delay = formValue.delay;
       this.settingsService.inputArrayLength = formValue.inputArrayLength;
+      this.settingsService.inputArrayType = formValue.inputArrayType;
       this.settingsService.colors = { 'barColor': formValue.barColor, 'highlightedBarColor': formValue.highlightedBarColor } as ColorType;
     });
   }

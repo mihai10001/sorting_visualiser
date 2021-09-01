@@ -5,6 +5,19 @@
     <mat-card-subtitle>Customize preferences. then press Play</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
+      <mat-form-field appearance="outline" floatLabel="always" class="w-75">
+        <mat-label class="custom-mat-label">Generated array type</mat-label>
+        <mat-select formControlName="inputArrayType">
+          <mat-option *ngFor="let type of possibleInputArrayTypes | keyvalue" [value]="type.key">{{ type.value }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="customizeSettingsForm.controls.inputArrayType.value === 'userInputArray'"
+        appearance="outline" floatLabel="always" class="w-75">
+        <mat-label class="custom-mat-label">User input array (comma delimited)</mat-label>
+        <input matInput formControlName="userInputArray">
+      </mat-form-field>
+
     <div class="w-75 d-flex justify-content-between">
       <label>Input array size</label>
       <label class="slider-label-bold">{{ customizeSettingsForm.controls.inputArrayLength.value }}</label>
