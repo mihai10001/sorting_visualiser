@@ -26,9 +26,11 @@ export class SettingsComponent implements OnInit {
 
     this.customizeSettingsForm.valueChanges.subscribe(formValue => {
       this.settingsService.delay = formValue.delay;
-      this.settingsService.inputArrayLength = formValue.inputArrayLength;
       this.settingsService.inputArrayType = formValue.inputArrayType;
       this.settingsService.inputArray = this.sanitizeUserInputArray(formValue.userInputArray);
+      this.settingsService.inputArrayLength = formValue.inputArrayType === 'userInputArray'
+        ? this.settingsService.inputArray.length 
+        : formValue.inputArrayLength;
       this.settingsService.colors = { 'barColor': formValue.barColor, 'highlightedBarColor': formValue.highlightedBarColor } as ColorType;
     });
   }
