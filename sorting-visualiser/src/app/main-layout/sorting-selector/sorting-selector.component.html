@@ -13,7 +13,8 @@
       </mat-select>
     </mat-form-field>
 
-    <button mat-fab color="accent" class="mx-2" (click)="onPlay()">
+    <button mat-fab color="accent" class="mx-2" (click)="onPlay()"
+      [disabled]="!selectedSortingFunctionForm.value || selectedSortingFunctionForm.value.length === 0">
       <mat-icon>play_arrow</mat-icon>
     </button>
   </mat-card-content>
