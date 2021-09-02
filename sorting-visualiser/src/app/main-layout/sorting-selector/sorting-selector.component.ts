@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { SettingsService } from '../services/settings.service';
+import { SettingsService, InputArrayType } from '../services/settings.service';
 import { ResultsService } from '../services/results.service';
 import { SortingFunctions, SortingFunctionObjectType } from '../../sorting-functions';
 
@@ -15,14 +15,13 @@ export class SortingSelectorComponent implements OnInit {
   selectedSortingFunctionForm: FormControl = new FormControl();
   playClickedCount: number = 0;
 
-  
   constructor(
     private settingsService: SettingsService,
     private resultsService: ResultsService
   ) { }
 
   ngOnInit() {
-    this.settingsService.inputArray = this.generateRandomInputArray(this.settingsService.inputArrayLength);
+    this.settingsService.inputArray = this.generateArray(this.settingsService.inputArrayType, this.settingsService.inputArrayLength);
 
     this.selectedSortingFunctionForm.valueChanges.subscribe(formValue => {
       this.settingsService.selectedSortingFunctionKeysValue = formValue;
@@ -32,15 +31,34 @@ export class SortingSelectorComponent implements OnInit {
   onPlay() {
     this.playClickedCount++;
     this.playClickedCount > 1 
-    && (this.settingsService.inputArray = this.generateRandomInputArray(this.settingsService.inputArrayLength));
+    && (this.settingsService.inputArray = this.generateArray(this.settingsService.inputArrayType, this.settingsService.inputArrayLength));
     this.settingsService.playSortingFunctionValue = true;
     this.resultsService.resultsSetNull = [];
     this.resultsService.resultsSubjectNext = true;
   }
-  
-  generateRandomInputArray(arraySize: number): number[] {
+
+  generateArray(arrayType: InputArrayType, arraySize: number) {
+    switch(arrayType) {
+      case 'randomSequentialArray':
+        return this.generateRandomSequentialArray(arraySize);
+      case 'randomArray':
+        return this.generateRandomArray(arraySize);
+      case 'userInputArray':
+        let array = this.settingsService.inputArray;
+        this.fisherYatesShuffle(array, 0, 0, 0);
+        return array;
+    }
+  }
+
+  generateRandomArray(arraySize: number): number[] {
     return Array.from({length: arraySize},
       () => Math.floor(Math.random() * 100)); 
+  }
+
+  generateRandomSequentialArray(arraySize: number): number[] {
+    let array = Array.from(Array(arraySize).keys());
+    this.fisherYatesShuffle(array, 0, 0, 0);
+    return array;
   }
 
   fisherYatesShuffle (a: number[], b: number, c: number, d: number) {
