@@ -6,8 +6,8 @@
   <div class="col-md-12 col-lg-9 p-1">
 
       <div class="row g-0">
-        <div class="col-md-12 col-lg-6" *ngFor="let key of selectedSortingFunctionKeys" #chartCanvases>
-          <div class="mb-1"><kbd>{{ key }}</kbd></div>
+        <div class="col-md-12 col-lg-{{ 12 / sortsPerRow }}" *ngFor="let key of selectedSortingFunctionKeys" #chartCanvases>
+          <div><kbd>{{ key }}</kbd></div>
           <app-chart
             [componentWidth]="chartCanvasWidth"
             [componentHeight]="chartCanvasHeight"
