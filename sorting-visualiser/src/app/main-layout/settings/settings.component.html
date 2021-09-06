@@ -5,6 +5,7 @@
     <mat-card-subtitle>Customize preferences. then press Play</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
+    <form [formGroup]="customizeSettingsForm">
       <mat-form-field appearance="outline" floatLabel="always" class="w-75">
         <mat-label class="custom-mat-label">Generated array type</mat-label>
         <mat-select formControlName="inputArrayType">
@@ -26,14 +27,13 @@
         [class.mat-slider-disabled]="customizeSettingsForm.controls.inputArrayType.value === 'userInputArray'">
       </mat-slider>
 
-    <div class="w-75 d-flex justify-content-between">
-      <label>Delay between array swaps (ms)</label>
-      <label class="slider-label-bold">{{ customizeSettingsForm.controls.delay.value }}</label>
-    </div>
-    <mat-slider min="1" max="1000" thumbLabel class="w-75"
-      [value]="customizeSettingsForm.controls.delay.value"
-      (change)="customizeSettingsForm.controls.delay.setValue($event.value)">
-    </mat-slider>
+      <div class="w-75 d-flex justify-content-between">
+        <label>Delay between array swaps (ms)</label>
+        <label class="slider-label-bold">{{ customizeSettingsForm.controls.delay.value }}</label>
+      </div>
+      <mat-slider formControlName="delay" min="1" max="1000" thumbLabel class="w-75">
+      </mat-slider>
+
       <div class="w-75 d-flex justify-content-between">
         <label>Sorts per row</label>
         <label class="slider-label-bold">{{ customizeSettingsForm.controls.sortsPerRow.value }}</label>
@@ -56,6 +56,7 @@
             [style.background]="customizeSettingsForm.controls.highlightedBarColor.value" readonly>
         </mat-form-field>
       </div>
+    </form>
   </mat-card-content>
-  * Incoming more settings :O *
+  * Incoming more settings ;) *
 </mat-card>
