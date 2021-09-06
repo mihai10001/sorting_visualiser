@@ -9,6 +9,8 @@ export const possibleInputArrayTypes: InputArrayTypeObject = {
   'randomArray': 'Random array',
   'userInputArray': 'User input array'
 };
+export type NumberOfSortsPerRow = 1 | 2 | 3 | 4;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,6 +23,7 @@ export class SettingsService {
   private _selectedSortingFunctionKeys: Subject<string[]> = new Subject();
   private _playSortingFunction: Subject<boolean> = new Subject();
   private _colors: ColorType = { barColor: '#71a6d2', highlightedBarColor: 'LightYellow'};
+  private _sortsPerRow: NumberOfSortsPerRow = 2;
 
   constructor() { }
 
@@ -73,4 +76,10 @@ export class SettingsService {
     this._colors = colors;
   }
 
+  get sortsPerRow(): NumberOfSortsPerRow {
+    return this._sortsPerRow;
+  }
+  set sortsPerRow(sortsPerRow: NumberOfSortsPerRow) {
+    this._sortsPerRow = sortsPerRow;
+  }
 }
