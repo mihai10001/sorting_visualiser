@@ -34,6 +34,13 @@
       [value]="customizeSettingsForm.controls.delay.value"
       (change)="customizeSettingsForm.controls.delay.setValue($event.value)">
     </mat-slider>
+      <div class="w-75 d-flex justify-content-between">
+        <label>Sorts per row</label>
+        <label class="slider-label-bold">{{ customizeSettingsForm.controls.sortsPerRow.value }}</label>
+      </div>
+      <mat-slider formControlName="sortsPerRow" min="1" max="4" thumbLabel class="w-75">
+      </mat-slider>
+
       <div>
         <mat-form-field appearance="outline" floatLabel="always">
           <mat-label class="custom-mat-label">Bar color</mat-label>

@@ -22,6 +22,7 @@ export class SettingsComponent implements OnInit {
       userInputArray: ['7, 6, 5, 4, 3, 2, 1'],
       barColor: [this.settingsService.colors.barColor],
       highlightedBarColor: [this.settingsService.colors.highlightedBarColor],
+      sortsPerRow: [this.settingsService.sortsPerRow]
     });
 
     this.customizeSettingsForm.valueChanges.subscribe(formValue => {
@@ -32,6 +33,7 @@ export class SettingsComponent implements OnInit {
         ? this.settingsService.inputArray.length 
         : formValue.inputArrayLength;
       this.settingsService.colors = { 'barColor': formValue.barColor, 'highlightedBarColor': formValue.highlightedBarColor } as ColorType;
+      this.settingsService.sortsPerRow = formValue.sortsPerRow;
     });
   }
 
