@@ -15,9 +15,9 @@ export class TableComponent implements OnInit {
   }
   columns = {
     'functionName': 'Function name',
-    'totalExecutionTime': 'Total execution time (ms)',
-    'numberOfComparisons': 'Number of comparisons',
-    'numberOfSwaps': 'Number of swaps',
+    'totalExecutionTime': 'Execution time (ms)',
+    'numberOfComparisons': 'Comparisons',
+    'numberOfSwaps': 'Swaps',
     'delayUsed': 'Delay used'
   };
   displayedColumns: string[] = Object.keys(this.columns);
