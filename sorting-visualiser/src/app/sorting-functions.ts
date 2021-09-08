@@ -29,6 +29,45 @@ export const SortingFunctions: SortingFunctionObjectType = {
     
     return results;
   },
+
+  'QuickSort Recursive': async (array: number[], highlightedIndexArray: number[], delay: number) => {
+    let results: ResultsObjectClass = new ResultsObjectClass();
+
+    const partition = async (array: number[], left: number, right: number) => {
+        let pivot = array[(left + right) >>> 1];
+
+        while (left <= right) {
+            ++results.numberOfComparisons;
+            while (array[left] < pivot) { left++; ++results.numberOfComparisons;}
+            while (array[right] > pivot) { right--; ++results.numberOfComparisons;}
+            ++results.numberOfComparisons;
+            if (left <= right) {
+              highlightedIndexArray[0] = left;
+              highlightedIndexArray[1] = right;
+              ++results.numberOfSwaps;
+              await swap(array, left, right, delay);
+              left++; right--;
+            }
+        }
+        return left;
+    }
+
+    const quickSort = async (array: number[], left: number, right: number) => {
+        let mid: number = await partition(array, left, right);
+
+        if (left < mid - 1) {
+          ++results.numberOfComparisons;
+          await quickSort(array, left, mid - 1);
+        }
+        if (right > mid) {
+          ++results.numberOfComparisons;
+          await quickSort(array, mid, right);
+        }
+    }
+
+    await quickSort(array, 0, array.length - 1);
+    return results;
+  },
   }
 };
       
