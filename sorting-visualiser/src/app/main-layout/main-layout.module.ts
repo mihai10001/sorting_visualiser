@@ -7,7 +7,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 
 import { MainLayoutRoutingModule } from './main-layout-routing.module';
 import { MainLayoutComponent } from './main-layout.component';
-import { ChartComponent } from './chart/chart.component';
+import { SortingChartComponent } from './sorting-chart/sorting-chart.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SortingSelectorComponent } from './sorting-selector/sorting-selector.component';
 import { TableComponent } from './results/table/table.component';
@@ -24,7 +24,7 @@ import { ResultsService } from './services/results.service';
   declarations: [
     MainLayoutComponent,
     SortingSelectorComponent,
-    ChartComponent,
+    SortingChartComponent,
     SettingsComponent,
     TableComponent,
     BarChartComponent,
