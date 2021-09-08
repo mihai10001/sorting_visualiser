@@ -4,11 +4,11 @@ import { ResultsService, ResultsObjectClass } from '../services/results.service'
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css']
+  selector: 'app-sorting-chart',
+  templateUrl: './sorting-chart.component.html',
+  styleUrls: ['./sorting-chart.component.css']
 })
-export class ChartComponent implements OnInit, OnDestroy {
+export class SortingChartComponent implements OnInit, OnDestroy {
 
   constructor(
     private settingsService: SettingsService,
