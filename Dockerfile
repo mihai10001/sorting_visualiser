@@ -2,7 +2,7 @@ FROM node:latest as build
 
 WORKDIR /usr/sorting-visualiser
 
-COPY ./ /usr/sorting-visualiser
+COPY ./sorting-visualiser /usr/sorting-visualiser
 
 RUN npm install
 
