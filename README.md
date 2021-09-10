@@ -184,5 +184,5 @@ Project Link: [https://github.com/mihai10001/sorting_visualiser](https://github.
 [stars-shield]: https://img.shields.io/github/stars/mihai10001/sorting_visualiser.svg?style=for-the-badge
 [stars-url]: https://github.com/mihai10001/sorting_visualiser/stargazers
 [license-shield]: https://img.shields.io/github/license/mihai10001/sorting_visualiser.svg?style=for-the-badge
-[license-url]: https://github.com/mihai10001/sorting_visualiser/blob/master/LICENSE.txt
+[license-url]: https://github.com/mihai10001/sorting_visualiser/blob/main/LICENSE.txt
 [product-screenshot]: images/screenshot.png
