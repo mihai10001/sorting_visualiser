@@ -40,7 +40,7 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Components</a></li>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#components">Built With</a></li>
       </ul>
     </li>
     <li>
@@ -64,8 +64,7 @@
 ## About The Project
 [![Sorting-visualiser][product-screenshot]](https://sort-visualise.herokuapp.com/)
 
-This is a web application created to visualise all sorts of sorting algorithms and to benchmark them in order to be able to compare them\
-It is one of the projects I've always wanted to create because it ties together knowledge from many areas I'm interested in, such as algorithms, benchmarking, analytics and visualisation tools, UI interactions, etc.
+This is a web application created to visualise all sorts of sorting algorithms and to benchmark them in order to be able to compare them
 
 What it does:
 * Lets the user choose between a list of implemented sorting algorithms
@@ -73,12 +72,12 @@ What it does:
 * Visualise results, directly on canvas or having charts (ex. pie-chart) and table results
 
 How it does it:
-* All sorting algorithms are implemented in place, so that the input array reference is shared between the UI and the actual sorting function (mutable array)
-* This allows real-time drawing, as the UI gets updated if the internal representation of the input variable (array in this case) changes - see Angular Change Detection for more information
+* All sorting algorithms are implemented in place, so that the input array reference is shared between the UI component that renders the animated charts and the sorting algorithm function (mutable array). This allows real-time drawing, as the UI gets re-rendered automatically if the internal representation of any input variable changes (array in this case) - see Angular Change Detection and how it is triggered for more information
 
 ### Components
 
-I've tried to create this application as modular as possible, by creating loosely-coupled interactions between components using services in Angular\
+I've tried to create this application as modular as possible, by creating loosely-coupled interactions between components using services and RxJS in Angular
+
 Here is a list of components (main-layout deals with rendering the needed components):
 * [Sorting selection](sorting-visualiser/src/app/main-layout/sorting-selector)
 * [Modular sorting chart/canvas](sorting-visualiser/src/app/main-layout/sorting-chart)
@@ -92,14 +91,14 @@ Here is a list of components (main-layout deals with rendering the needed compon
 
 ### Built With
 
-Frameworks / libraries:
+Frameworks:
 * [Angular](https://angular.io/)
 * [Angular Material](https://material.angular.io/)
-* [Ng2-Charts](https://valor-software.com/ng2-charts/)
 
-Add-ons/plugins/toolkits:
-* [Boostrap](https://getbootstrap.com/)
+Libraries / plugins / add-ons / toolkits:
+* [Ng2-Charts](https://valor-software.com/ng2-charts/)
 * [Ngx-color-picker](https://www.npmjs.com/package/ngx-color-picker)
+* [Boostrap](https://getbootstrap.com/)
 
 
 <!-- GETTING STARTED -->
@@ -121,23 +120,38 @@ A list of prerequisites in order to run the project:
    ```sh
    git clone https://github.com/mihai10001/sorting_visualiser.git
    ```
-2. Install NPM packages
+2. From the root folder
+   ```sh
+   cd ./sorting-visualiser
+   ```
+3. Install NPM packages
    ```sh
    npm install
    ```
-3. Run the application with NPM
+4. Run the application with NPM
    ```sh
    npm run start
+   ```
+
+
+### Docker
+
+If you prefer using Docker, you can build and run the application using the following commands:
+   ```sh
+   docker build -t sorting-visualiser .
+   docker run -d sorting-visualiser
    ```
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Pick a list of sorting algorithms from the selection dropdown, and press the Play button\
-Customise any preferred settings by toggling the settings area\
-If the need arises to add new sorting algorithms, please feel free to add them by modifying [this file](sorting-visualiser/src/app/sorting-functions.ts).
-If you want results displayed, follow the interface for defining a sorting function from the file above, and create a Results object
+Pick a list of sorting algorithms from the selection dropdown, and press the Play button
+
+Customise any preferred settings from the settings area
+
+Please feel free to add new sorting algorithms by modifying [this file](sorting-visualiser/src/app/sorting-functions.ts).
+If you want results displayed, follow the interface for defining a sorting function from the file above, and return a Results object at the end of the function
 
 
 <!-- ROADMAP -->
@@ -148,13 +162,16 @@ Version 2.0
 * Will fix the delay logic that biases algorithms by swaps (rather by swaps and comparisons)
 * Might defer the sorthing algorithms execution to different threads (web-workers) to alleviate processes running on the main UI thread
 
+Version 3.0
+* Maybe will find a way to implement algorithms that are not sorted in place
+
 See the [open issues](https://github.com/mihai10001/sorting_visualiser/issues) for a list of proposed features (and known issues).
 
 
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Feel free to reuse any of the code from this project. Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -175,6 +192,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Iliuta Mihai-Victor - rvivits@gmail.com
 
 Project Link: [https://github.com/mihai10001/sorting_visualiser](https://github.com/mihai10001/sorting_visualiser)
+
+It is one of the projects I've always wanted to create because it ties together knowledge from many areas I'm interested in, such as algorithms, benchmarking, animations and UI interactions, etc.
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
