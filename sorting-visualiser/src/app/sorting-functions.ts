@@ -68,6 +68,57 @@ export const SortingFunctions: SortingFunctionObjectType = {
     await quickSort(array, 0, array.length - 1);
     return results;
   },
+
+  'QuickSort Iterative': async (array: number[], highlightedIndexArray: number[], delay: number) => {
+    let results: ResultsObjectClass = new ResultsObjectClass();
+
+    const partitionHigh = async (array: number[], left: number, right: number) => {
+      let pivot = array[right];
+      let i = left;
+      
+      for(let j = left; j < right; j++) {
+        ++results.numberOfComparisons;
+        if(array[j] <= pivot) {
+          highlightedIndexArray[0] = i;
+          highlightedIndexArray[1] = j;
+          ++results.numberOfSwaps;
+          await swap(array, i, j, delay);
+          i++;
+        }
+      }
+
+      highlightedIndexArray[0] = i;
+      highlightedIndexArray[1] = right;
+      ++results.numberOfSwaps;
+      await swap(array, i, right, delay);
+      return i;
+    }
+    
+    const iterativeQuickSort = async (array: number[]) => {
+      let stack = [];
+      let start = 0;
+      let end = array.length - 1;
+      
+      stack.push({x: start, y: end});
+      
+      while(stack.length) {
+        ++results.numberOfComparisons;
+        const { x, y }: { x: number ; y: number }  = stack.shift() || { x: start, y: end };
+        const partition: number = await partitionHigh(array, x, y);
+        
+        if(partition - 1 > x) {
+          ++results.numberOfComparisons;
+          stack.push({x: x, y: partition - 1});
+        }
+        if(partition + 1 < y) {
+          ++results.numberOfComparisons;
+          stack.push({x: partition + 1, y: y});
+        }
+      }
+    }
+
+    await iterativeQuickSort(array);
+    return results;
   }
 };
       
