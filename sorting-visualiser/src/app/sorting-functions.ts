@@ -119,9 +119,48 @@ export const SortingFunctions: SortingFunctionObjectType = {
 
     await iterativeQuickSort(array);
     return results;
-  }
+  },
+
+  'BogoSort (DumbSort)': async (array: number[], highlightedIndexArray: number[], delay: number) => {
+    let results: ResultsObjectClass = new ResultsObjectClass();
+
+    const shuffle = async (array: number[]) => {
+      for (var j, x, i = array.length; i; j = Math.floor(Math.random() * i), x = array[--i], array[i] = array[j], array[j] = x);
+      return array;
+    };
+    
+    const isSorted = async (array: number[]) => {
+      for (let i = 1; i < array.length; i++) {
+        ++results.numberOfComparisons;
+        if (array[i-1] > array[i])
+          return false;
+      }
+      return true;
+    };
+    
+    const bogoSort = async (array: number[]) => {
+      var sorted = false;
+
+      const t0 = performance.now();
+      while (sorted == false) {
+        ++results.numberOfSwaps;
+        await sleep(delay * 5);
+        array = await shuffle(array);
+        sorted = await isSorted(array);
+
+        const t1 = performance.now();
+        if (((t1 - t0) / 1000) > 10)
+          return array;
+      }
+      return array;
+    };
+
+    await bogoSort(array);
+    return results;
+  },
+
 };
-      
+
 async function swap(array: number[], firstIndex: number, secondIndex: number, delay: number) {
   await sleep(delay);
   let temp = array[firstIndex];
