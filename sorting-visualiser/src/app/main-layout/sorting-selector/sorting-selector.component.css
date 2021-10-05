@@ -2,3 +2,8 @@
     background-image: url('/assets/sorting.png');
     background-size: 225%;
 }
+
+.github-logo {
+    width: 26px;
+    filter: invert(1);
+}
