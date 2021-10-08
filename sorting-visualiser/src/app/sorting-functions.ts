@@ -213,11 +213,57 @@ export const SortingFunctions: SortingFunctionObjectType = {
     await rytooSort(array, array.length - 1);
     return results;
   },
+
+  'MergeSort': async (array: number[], highlightedIndexArray: number[], delay: number) => {
+    let results: ResultsObjectClass = new ResultsObjectClass();
+
+    const merge = (array: number[], start: number, mid: number, end: number) => {
+      let start2 = mid + 1;
+
+      ++results.numberOfComparisons;
+      if (array[mid] <= array[start2])
+        return;
+
+      while (start <= mid && start2 <= end) {
+        ++results.numberOfComparisons;
+
+        ++results.numberOfComparisons;
+        if (array[start] <= array[start2])
+            start++;
+        else {
+          let value = array[start2];
+          let index = start2;
+
+          while (index != start) {
+            ++results.numberOfComparisons;
+            array[index] = array[index - 1];
+            highlightedIndexArray[0] = index;
+            highlightedIndexArray[1] = index - 1;
+            index--;
+          }
+
+          array[start] = value;
+          start++;
+          mid++;
+          start2++;
+        }
       }
     };
 
-    await rytooSort(array, array.length - 1);
+    const mergeSort = async (array: number[], left: number, right: number) => {
+      ++results.numberOfComparisons;
+      if (left < right) {
+        let middle = left + Math.floor((right - left) / 2);
+
+        mergeSort(array, left, middle);
+        mergeSort(array, middle + 1, right);
+        merge(array, left, middle, right);
+      }
+    };
+
+    await mergeSort(array, 0, array.length - 1);
     return results;
+  },
   }
 
 };
