@@ -139,11 +139,11 @@ export const SortingFunctions: SortingFunctionObjectType = {
     };
     
     const bogoSort = async (array: number[]) => {
-      var sorted = false;
+      let sorted = false;
 
       const t0 = performance.now();
       while (sorted == false) {
-        ++results.numberOfSwaps;
+        ++results.numberOfComparisons;
         await sleep(delay * 5);
         array = await shuffle(array);
         sorted = await isSorted(array);
@@ -205,9 +205,14 @@ export const SortingFunctions: SortingFunctionObjectType = {
         ++results.numberOfSwaps;
         await swap(array, maxIndex, lastIndex, delay);
 
-      if (lastIndex > 0) {
-        ++results.numberOfComparisons;
+      ++results.numberOfComparisons;
+      if (lastIndex > 0)
         await rytooSort(array, lastIndex - 1);
+    };
+
+    await rytooSort(array, array.length - 1);
+    return results;
+  },
       }
     };
 
