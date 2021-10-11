@@ -159,6 +159,32 @@ export const SortingFunctions: SortingFunctionObjectType = {
     return results;
   },
 
+  'SelectionSort': async (array: number[], highlightedIndexArray: number[], delay: number) => {
+    let results: ResultsObjectClass = new ResultsObjectClass();
+
+    for (let i = 0; i <= array.length - 1; i++) {
+      ++results.numberOfComparisons;
+      let minIndex = i;
+  
+      for (let j = i; j <= array.length - 1; j++) {
+        ++results.numberOfComparisons;
+        if (array[j] < array[minIndex]) {
+          minIndex = j;
+          highlightedIndexArray[0] = j;
+          highlightedIndexArray[1] = minIndex;
+        }
+      }
+
+      ++results.numberOfComparisons;
+      if (array[i] > array[minIndex]) {
+        ++results.numberOfSwaps;
+        await swap(array, i, minIndex, delay);
+      }
+    }
+  
+    return results;
+  },
+
   'RytooSort (SelectionSort)': async (array: number[], highlightedIndexArray: number[], delay: number) => {
     let results: ResultsObjectClass = new ResultsObjectClass();
 
