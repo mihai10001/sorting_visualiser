@@ -263,10 +263,9 @@ export const SortingFunctions: SortingFunctionObjectType = {
 
     await mergeSort(array, 0, array.length - 1);
     return results;
-  },
   }
 
-};
+}
 
 async function swap(array: number[], firstIndex: number, secondIndex: number, delay: number) {
   await sleep(delay);
