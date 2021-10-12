@@ -13,7 +13,7 @@ type SortingFunctionType = (
 
 
 export const SortingFunctions: SortingFunctionObjectType = {
-  'Bubble Sort': async (array: number[], highlightedIndexArray: number[], delay: number) => {
+  'BubbleSort': async (array: number[], highlightedIndexArray: number[], delay: number) => {
     let results: ResultsObjectClass = new ResultsObjectClass();
 
     for(let i = 0; i < array.length - 1; i++)
@@ -50,7 +50,7 @@ export const SortingFunctions: SortingFunctionObjectType = {
             }
         }
         return left;
-    }
+    };
 
     const quickSort = async (array: number[], left: number, right: number) => {
         let mid: number = await partition(array, left, right);
@@ -63,7 +63,7 @@ export const SortingFunctions: SortingFunctionObjectType = {
           ++results.numberOfComparisons;
           await quickSort(array, mid, right);
         }
-    }
+    };
 
     await quickSort(array, 0, array.length - 1);
     return results;
@@ -92,7 +92,7 @@ export const SortingFunctions: SortingFunctionObjectType = {
       ++results.numberOfSwaps;
       await swap(array, i, right, delay);
       return i;
-    }
+    };
     
     const iterativeQuickSort = async (array: number[]) => {
       let stack = [];
@@ -115,7 +115,7 @@ export const SortingFunctions: SortingFunctionObjectType = {
           stack.push({x: partition + 1, y: y});
         }
       }
-    }
+    };
 
     await iterativeQuickSort(array);
     return results;
@@ -263,7 +263,44 @@ export const SortingFunctions: SortingFunctionObjectType = {
 
     await mergeSort(array, 0, array.length - 1);
     return results;
-  }
+  },
+
+  'HeapSort (MaxHeap)': async (array: number[], highlightedIndexArray: number[], delay: number) => {
+    let results: ResultsObjectClass = new ResultsObjectClass();
+
+    const maxHeapify = async (array: number[], heapSize: number, index: number) => {
+      let largest = index;
+      let left = 2 * index + 1;
+      let right = 2 * index + 2;
+
+      if (left < heapSize && array[left] > array[largest]) {
+        largest = left; 
+      }
+
+      if (right < heapSize && array[right] > array[largest]) {
+        largest = right; 
+      }
+
+      if (largest != index) {
+        await swap(array, index, largest, delay);
+        maxHeapify(array, heapSize, largest); 
+      } 
+    }
+
+    const heapSort = async(array: number[], heapSize: number) => {
+      for (let i = Math.floor(heapSize / 2 - 1); i >= 0; i--) {
+        maxHeapify(array, heapSize, i); 
+      }
+
+      for (let i = heapSize - 1; i > 0; i--) {
+        await swap(array, 0, i, delay);
+        maxHeapify(array, i, 0); 
+      }
+    };
+
+    await heapSort(array, array.length);
+    return results;
+  },
 
 }
 
